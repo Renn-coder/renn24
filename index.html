@@ -1,3 +1,13 @@
+https://www.picgifs.com/graphics/c/cats/animaatjes-cats-2122221.gif
+``` :contentReference[oaicite:0]{index=0}
+
+Main neeche woh updated HTML code de raha hoon jisme maine aapka GIF link replace kar diya hai. Aap bas is code ko apne `index.html` me daal dijiye.
+
+---
+
+### ✅ Updated HTML (GIF change ke saath)
+
+```html
 <!doctype html>
 <html lang="hi">
 <head>
@@ -89,7 +99,6 @@
       color:var(--muted);
     }
 
-    /* container used to position moving "No" button */
     .btn-area{
       position:relative;
       width:220px;
@@ -97,7 +106,6 @@
       margin-top:6px;
     }
 
-    /* modal */
     .modal{
       position:fixed;
       inset:0;
@@ -159,21 +167,19 @@
     <h1>Do <strong>YOU</strong> LOVE <strong>MEE?</strong></h1>
 
     <div class="gif-wrap">
-      <!-- Cute cat GIF (public) -->
-      <img id="mainGif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="cute cat">
+      <!-- Updated cute cat GIF -->
+      <img id="mainGif" src="https://www.picgifs.com/graphics/c/cats/animaatjes-cats-2122221.gif" alt="cute cat">
     </div>
 
     <div class="controls">
       <button class="yes" id="yesBtn">Yes</button>
 
       <div class="btn-area" id="btnArea" aria-hidden="false">
-        <!-- No button will be absolutely positioned inside this container -->
         <button class="no" id="noBtn" style="position:absolute; left:60%; top:12px;">No</button>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
   <div class="modal" id="modal">
     <div class="modal-card" role="dialog" aria-modal="true">
       <h2>Yay! ❤️</h2>
@@ -186,7 +192,6 @@
   </div>
 
   <script>
-    // elements
     const noBtn = document.getElementById('noBtn');
     const btnArea = document.getElementById('btnArea');
     const yesBtn = document.getElementById('yesBtn');
@@ -194,14 +199,12 @@
     const hearts = document.getElementById('hearts');
     const closeModal = document.getElementById('closeModal');
 
-    // place No button randomly inside btnArea (keeps it inside bounds)
     function moveNoButtonRandom() {
       const rect = btnArea.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
       const areaW = rect.width;
       const areaH = rect.height;
 
-      // random left/top ensuring full button stays inside
       const maxLeft = Math.max(0, areaW - btnRect.width - 8);
       const maxTop = Math.max(0, areaH - btnRect.height - 8);
 
@@ -212,24 +215,18 @@
       noBtn.style.top = top + 'px';
     }
 
-    // on hover/mouseover -> move
     noBtn.addEventListener('mouseenter', moveNoButtonRandom);
-    // also move on touchstart for mobiles
     noBtn.addEventListener('touchstart', function(e){
-      e.preventDefault(); // avoid click
+      e.preventDefault();
       moveNoButtonRandom();
     }, {passive:false});
-
-    // small safeguard: if user clicks No quickly, move it away
     noBtn.addEventListener('click', function(e){
       e.preventDefault();
       moveNoButtonRandom();
     });
 
-    // Yes button opens modal and shows hearts animation
     yesBtn.addEventListener('click', function(){
       modal.classList.add('show');
-      // create transient heart emojis for animation
       hearts.innerHTML = '';
       for (let i=0;i<6;i++){
         const span = document.createElement('span');
@@ -237,17 +234,11 @@
         span.textContent = '❤️';
         hearts.appendChild(span);
       }
-      // optional: change gif to a happier version
-      const gif = document.getElementById('mainGif');
-      // Uncomment and replace with your celebration GIF if you have one:
-      // gif.src = 'https://example.com/celebrate.gif';
     });
 
     closeModal.addEventListener('click', function(){ modal.classList.remove('show'); });
 
-    // If user resizes, re-place No button to a safe position
     window.addEventListener('resize', function(){ 
-      // keep it inside; if currently outside, move to center-right
       const r = btnArea.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
       if (b.right > r.right || b.bottom > r.bottom) {
@@ -256,9 +247,7 @@
       }
     });
 
-    // initial placement
     window.addEventListener('load', function(){
-      // place No button at a friendly position
       noBtn.style.left = (btnArea.clientWidth * 0.6) + 'px';
       noBtn.style.top = '12px';
     });
